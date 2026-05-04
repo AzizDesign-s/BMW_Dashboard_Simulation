@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Pirulen Custom Font Face ── */
+@font-face {
+  font-family: "Pirulen";
+  src:
+    url("/fonts/pirulen.woff2") format("woff2"),
+    url("/fonts/pirulen.woff") format("woff"),
+    url("/fonts/pirulen.ttf") format("truetype");
+  font-weight: normal; /* 400 */
+  font-style: normal;
+  font-display: swap; /* shows fallback font while loading */
+}
+
+/* ── CSS Variables for reuse ── */
+:root {
+  color-scheme: dark;
+  --font-pirulen: "Pirulen", "Orbitron", monospace;
+  --font-helvetica: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+/* ── Base usage ── */
+body {
+  font-family: var(--font-helvetica);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-pirulen);
+}
+
+/* ── Utility classes (manual) ── */
+.font-pirulen {
+  font-family: var(--font-pirulen);
+}
+
+.font-helvetica {
+  font-family: var(--font-helvetica);
+}
