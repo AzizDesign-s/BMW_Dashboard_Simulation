@@ -4,7 +4,7 @@ import Brand from "./icons/Brand";
 const Footer = () => {
   const website = "https://azizdesigns.framer.ai";
   return (
-    <div className="w-full px-4 py-2 fixed bottom-0 z-10 flex justify-center items-center bg-blue-header">
+    <div className="w-full px-4 py-2 fixed bottom-0 z-10 flex justify-center items-center bg-bluee-darkBlueBg">
       <div className="flex justify-center items-center gap-1">
         <h1 className="font-helvetica text-sm font-normal text-text-secondary">
           Designed By

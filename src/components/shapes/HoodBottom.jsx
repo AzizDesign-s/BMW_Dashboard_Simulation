@@ -1,22 +1,22 @@
 import React from "react";
 
-const HoodBottom = ({ className = "" }) => {
+const HoodBottom = ({ className = "", height = 380, width = 67 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="380"
-      height="67"
+      width={width}
+      height={height}
       viewBox="0 0 380 67"
       fill="none"
-      className={`w-ful, h-auto ${className}`}
+      className={className}
     >
       <path
         d="M380 67H0L38.0025 16.0766C45.5527 5.95934 57.4359 0 70.0598 0H309.94C322.564 0 334.447 5.95935 341.997 16.0766L380 67Z"
-        fill="url(#hoodGrad)"
+        fill="url(#paint0_linear_234_58)"
       />
       <defs>
         <linearGradient
-          id="hoodGrad"
+          id="paint0_linear_234_58"
           x1="190"
           y1="110.5"
           x2="190"

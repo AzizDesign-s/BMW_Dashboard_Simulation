@@ -53,7 +53,7 @@ module.exports = {
         "blue-main-bg":
           "linear-gradient(180deg, #060619 18.9%, #232342 86.86%)",
         "blue-header":
-          "linear-gradient(180deg, #050618 4.06%, #1A207E 212.69%)",
+          "linear-gradient(90deg,rgba(50,103,217,0.00) 0%,#3267D9 49.77%,rgba(50,103,217,0.00) 100%)",
         "blue-footer":
           "linear-gradient(180deg, #1A207E -64.93%, #050618 103.33%)",
         "blue-sky":

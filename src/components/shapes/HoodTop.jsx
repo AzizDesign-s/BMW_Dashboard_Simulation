@@ -8,15 +8,15 @@ const HoodTop = ({ className = "" }) => {
       height="67"
       viewBox="0 0 380 67"
       fill="none"
-      className={`w-full h-auto ${className}`}
+      className={className}
     >
       <path
         d="M0 0H380L341.997 50.9234C334.447 61.0407 322.564 67 309.94 67H70.0598C57.4359 67 45.5527 61.0406 38.0025 50.9234L0 0Z"
-        fill="url(#hoodGrad)"
+        fill="url(#paint0_linear_234_53)"
       />
       <defs>
         <linearGradient
-          id="hoodgrand"
+          id="paint0_linear_234_53"
           x1="190"
           y1="-43.5"
           x2="190"
