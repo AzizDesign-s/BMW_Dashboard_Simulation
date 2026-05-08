@@ -3,10 +3,11 @@ import React from "react";
 const OilIndicator = ({
   width = 22,
   height = 9,
-  color = "#F41717", // default red — override via prop
   className = "",
   style = {},
+  isActive = false,
 }) => {
+  const color = isActive ? "#F41414" : "#121233";
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

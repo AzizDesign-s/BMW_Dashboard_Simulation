@@ -3,6 +3,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      animation: {
+        blink: "pulse 0.1s ease-in-out infinite", // 👈 faster than default pulse (2s)
+      },
       fontFamily: {
         // ── Pirulen (custom downloaded font) ──────────────
         pirulen: [
@@ -69,9 +72,14 @@ module.exports = {
           "linear-gradient(159deg, #E8E1E2 -0.07%, #054152 101.71%)",
         "rpm-gradient":
           "linear-gradient(159deg, #CFD9FF -0.07%, #520505 101.71%)",
+
+        "engine-switch":
+          "radial-gradient(circle at 40% 35%, #2A3A5A 0%, #0D1628 60%, #050618 100%)",
       },
       boxShadow: {
         cardShadow: "2px 2px 4px 0 rgba(30,33,69,0.25)",
+        switch:
+          "0 0 25px rgba(50,103,217,0.25), inset 0 0 15px rgba(0,0,0,0.6)",
       },
     },
   },
