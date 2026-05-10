@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import SBtn from "./shapes/SBtn";
 import Indicator from "./icons/Indicator";
 import OilIndicator from "./icons/OilIndicator";
 import Fuel from "./icons/Fuel";
 import Key from "./icons/Key";
 
-const Indicatorss = ({ isEngineOn, onEngineToggle, fuelIndicatorActive }) => {
+const Indicatorss = ({
+  isEngineOn,
+  onEngineToggle,
+  fuelIndicatorActive,
+  oilIndicatorActive,
+}) => {
   const [leftActive, setLeftActive] = useState(false);
   const [rightActive, setRightActive] = useState(false);
 
@@ -32,7 +38,10 @@ const Indicatorss = ({ isEngineOn, onEngineToggle, fuelIndicatorActive }) => {
         <Key isActive={isEngineOn} />
       </button>
       <div className=" px-4 w-full h-fit flex justify-between items-center">
-        <SBtn icon={<OilIndicator isActive={isEngineOn} />} isActive={false} />
+        <SBtn
+          icon={<OilIndicator isActive={oilIndicatorActive} />}
+          isActive={false}
+        />
         <SBtn icon={<Fuel isActive={fuelIndicatorActive} />} isActive={false} />
       </div>
       <div className=" px-9 w-full h-fit flex justify-between items-center">
