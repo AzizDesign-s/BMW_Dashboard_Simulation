@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Fuel = ({ isEngineOn = false, level = 0 }) => {
-  const fuelHeight = isEngineOn ? level : 0;
-  const isLow = level < 20;
+const Fuel = ({ isEngineOn = false, fuelLevel }) => {
+  const fuelHeight = isEngineOn ? fuelLevel : 0;
+  const isLow = fuelLevel < 20;
   return (
     <div className="inline-flex h-40 w-fit items-end gap-2">
       {/* <div className="w-4 h-full bg-fuel-gradient rounded-[40px_40px_0_0]" /> */}
@@ -13,7 +13,10 @@ const Fuel = ({ isEngineOn = false, level = 0 }) => {
           className="absolute bottom-0 w-full  bg-fuel-gradient transition-all duration-1000 ease-out"
           initial={{ height: "0%" }}
           animate={{ height: `${fuelHeight}%` }}
-          transition={{ duration: 1, ease: "easeOut" }} // 👈 smooth fill
+          transition={{
+            duration: fuelHeight === 0 ? 0.5 : 0.15, // 👈 fast on drain, smooth on fill
+            ease: "linear", // 👈 linear so each drop is visible immediately
+          }}
           style={{
             borderRadius: fuelHeight > 90 ? "40px 40px 0 0" : "0",
           }}

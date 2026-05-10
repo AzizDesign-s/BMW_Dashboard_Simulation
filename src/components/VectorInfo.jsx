@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import car from "../assets/Car.png";
 
-const VectorInfo = ({ speed = 80 }) => {
+const VectorInfo = ({ speedLimit = 80, speed }) => {
   const isOverSpeed = speed > 80;
   return (
     <div className="w-full h-96  absolute top-0 z-10 ">
@@ -35,7 +35,7 @@ const VectorInfo = ({ speed = 80 }) => {
           animate={{ color: isOverSpeed ? "#FF0000" : "#FFFFFF" }} // 👈 number turns red too
           transition={{ duration: 0.3 }}
         >
-          {speed}
+          {speedLimit}
         </motion.span>
       </motion.div>
 

@@ -1,10 +1,11 @@
 import React from "react";
+import useSpeedSweep from "./hooks/useSpeedSweep";
 
 const RADIUS = 90;
 const CX = 113;
 const CY = 113;
-const START_ANGLE = 135; // arc starts bottom-left
-const END_ANGLE = 405; // arc ends bottom-right (270deg sweep)
+const START_ANGLE = 135;
+const END_ANGLE = 405;
 const MAX_SPEED = 220;
 
 function polarToXY(angle, radius) {
@@ -23,12 +24,12 @@ function arcPath(startAngle, endAngle, radius) {
 }
 
 const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
-  const SWEEP = END_ANGLE - START_ANGLE; // 270 degrees
-  const progress = Math.min(speed / MAX_SPEED, 1);
+  const { displaySpeed, isSweeping } = useSpeedSweep(isEngineOn, speed); // 👈 one line
+
+  const SWEEP = END_ANGLE - START_ANGLE;
+  const progress = Math.min(displaySpeed / MAX_SPEED, 1);
   const midAngle = START_ANGLE + SWEEP * 0.5;
   const needleAngle = START_ANGLE + progress * SWEEP;
-
-  // Split arc: blue for first half, red for second half
   const blueEnd = Math.min(needleAngle, midAngle);
   const showRed = needleAngle > midAngle;
 
@@ -41,7 +42,7 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* ---- Background track ---- */}
+        {/* Background track */}
         <path
           d={arcPath(START_ANGLE, END_ANGLE, RADIUS)}
           stroke="rgba(255,255,255,0.08)"
@@ -50,7 +51,7 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
           fill="none"
         />
 
-        {/* ---- Tick marks ---- */}
+        {/* Tick marks */}
         {Array.from({ length: 27 }, (_, i) => {
           const angle = START_ANGLE + (i / 26) * SWEEP;
           const isMajor = i % 2 === 0;
@@ -73,7 +74,7 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
           );
         })}
 
-        {/* ---- Blue arc (0 to 50%) ---- */}
+        {/* Blue arc */}
         {progress > 0 && (
           <path
             d={arcPath(START_ANGLE, blueEnd, RADIUS)}
@@ -81,14 +82,11 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
             strokeWidth="8"
             strokeLinecap="round"
             fill="none"
-            style={{
-              filter: "drop-shadow(0 0 4px #4D9DE0)",
-              transition: "all 0.3s ease-out",
-            }}
+            style={{ filter: "drop-shadow(0 0 4px #4D9DE0)" }}
           />
         )}
 
-        {/* ---- Red arc (50% to 100%) ---- */}
+        {/* Red arc */}
         {showRed && (
           <path
             d={arcPath(midAngle, needleAngle, RADIUS)}
@@ -96,14 +94,11 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
             strokeWidth="8"
             strokeLinecap="round"
             fill="none"
-            style={{
-              filter: "drop-shadow(0 0 4px #D62828)",
-              transition: "all 0.3s ease-out",
-            }}
+            style={{ filter: "drop-shadow(0 0 4px #D62828)" }}
           />
         )}
 
-        {/* ---- Center circle ---- */}
+        {/* Center circle */}
         <circle
           cx={CX}
           cy={CY}
@@ -113,7 +108,7 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
           strokeWidth="1"
         />
 
-        {/* ---- Speed number ---- */}
+        {/* Speed number */}
         <text
           x={CX}
           y={CY - 8}
@@ -122,12 +117,11 @@ const SpeedInfo = ({ speed = 0, isEngineOn = false }) => {
           fontSize="42"
           fontWeight="700"
           fontFamily="Pirulen, monospace"
-          style={{ transition: "all 0.1s" }}
         >
-          {speed}
+          {displaySpeed}
         </text>
 
-        {/* ---- Km/h label ---- */}
+        {/* Km/h */}
         <text
           x={CX}
           y={CY + 20}
