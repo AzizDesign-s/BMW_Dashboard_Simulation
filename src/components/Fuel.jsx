@@ -1,21 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Fuel = ({ isEngineOn = false, fuelLevel }) => {
+const Fuel = ({ isEngineOn = false, fuelLevel = 0 }) => {
   const fuelHeight = isEngineOn ? fuelLevel : 0;
   const isLow = fuelLevel < 20;
+  // console.log("fuelLevel in Fuel component:", fuelLevel);
   return (
     <div className="inline-flex h-40 w-fit items-end gap-2">
       {/* <div className="w-4 h-full bg-fuel-gradient rounded-[40px_40px_0_0]" /> */}
       <div className="w-4 h-full bg-bluee-nonActiveStroke rounded-[40px_40px_0_0] overflow-hidden relative">
         {/* Fill level - grows from bottom */}
         <motion.div
-          className="absolute bottom-0 w-full  bg-fuel-gradient transition-all duration-1000 ease-out"
+          className="absolute bottom-0 w-full  bg-fuel-gradient"
           initial={{ height: "0%" }}
           animate={{ height: `${fuelHeight}%` }}
           transition={{
-            duration: fuelHeight === 0 ? 0.5 : 0.15, // 👈 fast on drain, smooth on fill
-            ease: "linear", // 👈 linear so each drop is visible immediately
+            duration: 0.2, // 👈 single fast duration for both fill and drain
+            ease: "linear",
           }}
           style={{
             borderRadius: fuelHeight > 90 ? "40px 40px 0 0" : "0",
@@ -40,7 +41,7 @@ const Fuel = ({ isEngineOn = false, fuelLevel }) => {
         </p>
         <motion.p
           className="font-helvetica text-base font-normal"
-          animate={{ color: isLow && isEngineOn ? "#FF4444" : "" }}
+          animate={{ color: isLow && isEngineOn ? "#FF4444" : "#ffffff" }}
           transition={{ duration: 0.3 }}
         >
           0

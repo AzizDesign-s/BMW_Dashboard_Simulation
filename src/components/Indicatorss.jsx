@@ -18,6 +18,8 @@ const Indicatorss = ({
   stopBrake,
   isAccelerating,
   isBraking,
+  topUpFuel,
+  topUpOil,
 }) => {
   const [leftActive, setLeftActive] = useState(false);
   const [rightActive, setRightActive] = useState(false);
@@ -88,8 +90,13 @@ const Indicatorss = ({
         <SBtn
           icon={<OilIndicator isActive={oilIndicatorActive} />}
           isActive={false}
+          onClick={topUpOil}
         />
-        <SBtn icon={<Fuel isActive={fuelIndicatorActive} />} isActive={false} />
+        <SBtn
+          icon={<Fuel isActive={fuelIndicatorActive} />}
+          isActive={false}
+          onClick={topUpFuel}
+        />
       </div>
       <div className=" px-9 w-full h-fit flex justify-between items-center z-20">
         <SBtn

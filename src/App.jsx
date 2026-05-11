@@ -15,12 +15,8 @@ const App = () => {
   const isAcceleratingRef = useRef(false);
   const [isEngineOn, setIsEngineOn] = useState(false);
   const [gear, setGear] = useState("P");
+  const [isFuelEmpty, setIsFuelEmpty] = useState(false);
 
-  const { oilLevel, oilIndicatorActive } = useOil(isEngineOn);
-  const { fuelLevel, fuelIndicatorActive, isEmpty, topUpFuel } = useFuel(
-    isEngineOn,
-    isAcceleratingRef,
-  );
   const {
     speed,
     isAccelerating,
@@ -29,7 +25,24 @@ const App = () => {
     stopAccelerate,
     startBrake,
     stopBrake,
-  } = useSpeed(isEngineOn, gear, isEmpty);
+  } = useSpeed(isEngineOn, gear, isFuelEmpty);
+
+  const { fuelLevel, fuelIndicatorActive, isEmpty, topUpFuel } = useFuel(
+    isEngineOn,
+    isAcceleratingRef,
+  );
+
+  const {
+    oilLevel,
+    oilIndicatorActive,
+    isEmpty: isOilEmpty,
+    topUpOil,
+  } = useOil(isEngineOn, speed);
+
+  // Sync isEmpty from useFuel back to App state
+  useEffect(() => {
+    setIsFuelEmpty(isEmpty); // 👈 keeps useSpeed in sync
+  }, [isEmpty]);
 
   // keep ref in sync
   useEffect(() => {
@@ -56,7 +69,6 @@ const App = () => {
         oilLevel={oilLevel}
         speed={speed}
         isEmpty={isEmpty}
-        topUpFuel={topUpFuel}
       />
       <Indicatorss
         isEngineOn={isEngineOn}
@@ -69,6 +81,8 @@ const App = () => {
         stopBrake={stopBrake}
         isAccelerating={isAccelerating}
         isBraking={isBraking}
+        topUpFuel={topUpFuel}
+        topUpOil={topUpOil}
       />
 
       {/* Static One----- */}
