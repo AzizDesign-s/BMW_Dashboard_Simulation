@@ -20,23 +20,26 @@ const Indicatorss = ({
   isBraking,
   topUpFuel,
   topUpOil,
+  onSignalSound,
+  offSignalSound,
 }) => {
   const [leftActive, setLeftActive] = useState(false);
   const [rightActive, setRightActive] = useState(false);
 
   function handleLeft() {
-    if (isEngineOn) {
-      setLeftActive((prev) => !prev);
-    }
+    if (isEngineOn) return;
+    const newState = !leftActive;
 
+    setLeftActive(newState);
     setRightActive(false);
+    newState ? onSignalSound() : offSignalSound();
   }
   function handleRight() {
-    if (isEngineOn) {
-      setRightActive((prev) => !prev);
-    }
-
+    if (!isEngineOn) return;
+    const newState = !rightActive;
+    setRightActive(newState);
     setLeftActive(false);
+    newState ? onSignalSound() : offSignalSound(); // 👈 play/stop on toggle
   }
   return (
     <div className="w-full h-fit flex flex-col gap-4  z-20 px-4 absolute bottom-32">

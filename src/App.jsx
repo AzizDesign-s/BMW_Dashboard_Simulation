@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import useSound from "./components/hooks/useSound.js";
 import useFuel from "./components/hooks/useFuel";
 import useOil from "./components/hooks/useOil";
 import useSpeed from "./components/hooks/useSpeed.js";
@@ -16,7 +16,7 @@ const App = () => {
   const [isEngineOn, setIsEngineOn] = useState(false);
   const [gear, setGear] = useState("P");
   const [isFuelEmpty, setIsFuelEmpty] = useState(false);
-
+  const sound = useSound();
   const {
     speed,
     isAccelerating,
@@ -39,6 +39,43 @@ const App = () => {
     topUpOil,
   } = useOil(isEngineOn, speed);
 
+  // Engine on/off sound
+  useEffect(() => {
+    if (isEngineOn) {
+      sound.playEngineStart(); // 👈 start sound + idle
+    } else {
+      sound.stopEngine(); // 👈 stop idle
+    }
+  }, [isEngineOn]);
+
+  // Acceleration sound
+  useEffect(() => {
+    if (isAccelerating) {
+      sound.startAccelerationSound();
+    } else {
+      sound.stopAccelerationSound();
+    }
+  }, [isAccelerating]);
+
+  // Brake sound
+  useEffect(() => {
+    if (isBraking) sound.playBrake();
+  }, [isBraking]);
+
+  // Fuel warning sound
+  useEffect(() => {
+    if (fuelIndicatorActive && isEngineOn) {
+      sound.playFuelWarning();
+    }
+  }, [fuelIndicatorActive]);
+
+  // Oil warning sound
+  useEffect(() => {
+    if (oilIndicatorActive && isEngineOn) {
+      sound.playOilWarning();
+    }
+  }, [oilIndicatorActive]);
+
   // Sync isEmpty from useFuel back to App state
   useEffect(() => {
     setIsFuelEmpty(isEmpty); // 👈 keeps useSpeed in sync
@@ -54,6 +91,17 @@ const App = () => {
     if (!isEngineOn) setGear("P");
   }, [isEngineOn]);
 
+  // Engine toggle with sound
+  const handleEngineToggle = () => {
+    setIsEngineOn((prev) => !prev);
+  };
+
+  // Gear change with sound
+  const handleGearChange = (g) => {
+    sound.playGearChange(); // 👈 play on every gear change
+    setGear(g);
+  };
+
   return (
     <div className="bg-blue-main-bg w-full h-screen pt-40  ">
       <div className="w-full h-auto fixed bottom-0 z-0">
@@ -62,7 +110,11 @@ const App = () => {
       </div>
 
       <Header />
-      <HoodFoot gear={gear} onGearChange={setGear} isEngineOn={isEngineOn} />
+      <HoodFoot
+        gear={gear}
+        onGearChange={handleGearChange}
+        isEngineOn={isEngineOn}
+      />
       <Speed
         isEngineOn={isEngineOn}
         fuelLevel={fuelLevel}
@@ -74,7 +126,7 @@ const App = () => {
         isEngineOn={isEngineOn}
         fuelIndicatorActive={fuelIndicatorActive}
         oilIndicatorActive={oilIndicatorActive}
-        onEngineToggle={() => setIsEngineOn((prev) => !prev)}
+        onEngineToggle={handleEngineToggle}
         startAccelerate={startAccelerate}
         stopAccelerate={stopAccelerate}
         startBrake={startBrake}
@@ -83,6 +135,8 @@ const App = () => {
         isBraking={isBraking}
         topUpFuel={topUpFuel}
         topUpOil={topUpOil}
+        onSignalSound={sound.startSignalSound} // 👈 pass signal sound
+        offSignalSound={sound.stopSignalSound}
       />
 
       {/* Static One----- */}
