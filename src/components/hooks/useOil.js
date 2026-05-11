@@ -47,7 +47,7 @@ const useOil = (isEngineOn, speed) => {
 
     const drainInterval = setInterval(() => {
       setOilLevel((prev) => {
-        const newLevel = parseFloat((prev - 1.5).toFixed(2)); // 👈 drain rate
+        const newLevel = parseFloat((prev - 0.5).toFixed(2)); // 👈 drain rate
         if (newLevel <= 0) {
           setIsEmpty(true);
           return 0;

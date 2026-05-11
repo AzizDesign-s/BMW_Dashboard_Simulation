@@ -48,7 +48,7 @@ const useFuel = (isEngineOn, isAcceleratingRef) => {
       if (!isAcceleratingRef.current) return; // 👈 only drain when accelerating
 
       setFuelLevel((prev) => {
-        const newLevel = parseFloat((prev - 2).toFixed(2));
+        const newLevel = parseFloat((prev - 0.5).toFixed(2));
         if (newLevel <= 0) {
           setIsEmpty(true);
           return 0;
