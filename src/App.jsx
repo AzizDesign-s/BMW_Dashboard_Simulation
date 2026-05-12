@@ -105,14 +105,15 @@ const App = () => {
     setGear(g);
   };
 
-  const scale = Math.min(window.innerWidth / 390, window.innerHeight / 844);
+  const scale = Math.min(window.innerWidth / 420, window.innerHeight / 844);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-bluee-darkBlueBg">
       {/* Scale wrapper */}
       <div
+        className="sm:w-full"
         style={{
-          width: 390,
+          width: 420,
           height: 844,
           transform: `scale(${scale})`, // 👈 scales entire app
           transformOrigin: "center center", // 👈 scales from center
