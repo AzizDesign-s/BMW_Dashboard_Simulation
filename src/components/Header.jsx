@@ -12,8 +12,8 @@ const Header = () => {
   const tempDisplay = loading ? "--°C" : error ? "25°C" : `${temp}°C`;
 
   return (
-    <div className="w-full absolute top-0  h-20 overflow-visible flex  flex-col justify-center items-center px-4">
-      <HoodTop className="w-full px-4 h-auto absolute" />
+    <div className="w-full absolute top-0  h-16 overflow-visible flex  flex-col justify-center items-center ">
+      <HoodTop className="w-full  h-auto absolute top-0" />
 
       <div className="z-10 px-14 w-full h-full flex justify-between items-center">
         <div className="flex w-fit justify-start items-center gap-1">

@@ -6,7 +6,7 @@ const HoodBottom = ({ className = "", height = 380, width = 67 }) => {
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 380 67"
+      viewBox="0 0 380 80"
       fill="none"
       className={className}
     >

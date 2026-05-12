@@ -27,7 +27,7 @@ const Indicatorss = ({
   const [rightActive, setRightActive] = useState(false);
 
   function handleLeft() {
-    if (isEngineOn) return;
+    if (!isEngineOn) return;
     const newState = !leftActive;
 
     setLeftActive(newState);
@@ -42,8 +42,8 @@ const Indicatorss = ({
     newState ? onSignalSound() : offSignalSound(); // 👈 play/stop on toggle
   }
   return (
-    <div className="w-full h-fit flex flex-col gap-4  z-20 px-4 absolute bottom-32">
-      <div className="absolute z-10 w-3/4 h-full px-10 left-1/2 top-0  -translate-x-1/2 flex justify-between items-center">
+    <div className="w-full h-fit flex flex-col gap-4  z-20  absolute bottom-32">
+      <div className="absolute z-10 w-3/4 h-full  px-4 left-1/2 top-0  -translate-x-1/2 flex justify-between items-center">
         {/* Brake pedal */}
         <AnimatePresence>
           {isEngineOn && (
@@ -89,7 +89,7 @@ const Indicatorss = ({
         </AnimatePresence>
       </div>
 
-      <div className=" px-4 w-full h-fit flex justify-between items-center">
+      <div className=" px-4 w-full h-fit flex  justify-between items-center">
         <SBtn
           icon={<OilIndicator isActive={oilIndicatorActive} />}
           isActive={false}
