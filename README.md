@@ -8,7 +8,7 @@
 
 **A real-time interactive BMW M car dashboard simulator — built mobile-first with React, Vite, Tailwind CSS and Framer Motion.**
 
-[Live Demo](https://bmw-dashboard.vercel.app) · [Portfolio](https://azizdesigns.framer.ai) · [Report Bug](https://github.com/yourusername/bmw-dashboard/issues)
+[Live Demo]([https://bmw-dashboard.vercel.app) · [Portfolio](https://azizdesigns.framer.ai) · [Report Bug](https://github.com/yourusername/bmw-dashboard/issues)
 
 </div>
 
